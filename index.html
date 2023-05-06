@@ -30,6 +30,16 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        .filterDiv {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
@@ -403,14 +413,17 @@
                 </div>
                 <div class="col-lg-6 text-lg-end">
                     <ul class="list-inline mx-n3 mb-0" id="portfolio-flters">
-                        <li class="mx-3 active" data-filter="*">All Projects</li>
-                        <li class="mx-3" data-filter=".first">Websites</li>
-                        <li class="mx-3" data-filter=".second">Web Applications</li>
+                        <li class="mx-3 active" onclick="filterSelection('all')"> Show all</li>
+                        <li class="mx-3" onclick="filterSelection('frontend')"> Frontend</li>
+                        <li class="mx-3" onclick="filterSelection('javascript')"> Javascript</li>
+                        <li class="mx-3" onclick="filterSelection('php')"> PHP</li>
+                        <li class="mx-3" onclick="filterSelection('mern')"> MERN Stack</li>
+                        <li class="mx-3" onclick="filterSelection('asp')"> ASP.Net</li>
                     </ul>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-3 g-4 wow fadeInUp">
-                <div class="col-lg-4 col-md-6 portfolio-item first">
+                <div class="col-lg-4 col-md-6 filterDiv frontend">
                     <div class="portfolio-img rounded overflow-hidden">
                         <img class="img-fluid" src="./img/Project_PortfolioWebsite.png" alt="">
                         <div class="card-img-overlay">
@@ -423,7 +436,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item first">
+                <div class="col-lg-4 col-md-6 filterDiv javascript">
                     <div class="portfolio-img rounded overflow-hidden">
                         <img class="img-fluid" src="./img/Project_ToDoList_.png" alt="">
                         <div class="card-img-overlay">
@@ -436,12 +449,40 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item first">
+                <div class="col-lg-4 col-md-6 filterDiv javascript">
                     <div class="portfolio-img rounded overflow-hidden">
                         <img class="img-fluid" src="./img/Project_NotesEditor.png" alt="">
                         <div class="card-img-overlay">
                             <h3 class="alert-light text-warning px-3 pt-2 border-0 rounded-top m-0">Notes Editor</h3>
                             <div class="alert-light text-dark px-3 pb-2 border-0 rounded-bottom m-0">Notes Editor using Vanilla JS and IndexedDB</div>
+                        </div>
+                        <div class="portfolio-btn flex-row-reverse">
+                            <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="https://sonis-chronicles-123.000webhostapp.com/projects/NotesEditor/" target="_blank"><i class="fa fa-eye"></i></a>
+                            <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="https://github.com/akashsoni398/Notes-Editor" target="_blank"><i class="fa fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 filterDiv php">
+                    <div class="portfolio-img rounded overflow-hidden">
+                        <img class="img-fluid" src="./img/Project_NotesEditor.png" alt="">
+                        <div class="card-img-overlay">
+                            <h3 class="alert-light text-warning px-3 pt-2 border-0 rounded-top m-0">Music Hub</h3>
+                            <div class="alert-light text-dark px-3 pb-2 border-0 rounded-bottom m-0">Music Streaming website with PHP</div>
+                        </div>
+                        <div class="portfolio-btn flex-row-reverse">
+                            <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="https://sonis-chronicles-123.000webhostapp.com/projects/NotesEditor/" target="_blank"><i class="fa fa-eye"></i></a>
+                            <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="https://github.com/akashsoni398/Notes-Editor" target="_blank"><i class="fa fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 filterDiv php">
+                    <div class="portfolio-img rounded overflow-hidden">
+                        <img class="img-fluid" src="./img/Project_NotesEditor.png" alt="">
+                        <div class="card-img-overlay">
+                            <h3 class="alert-light text-warning px-3 pt-2 border-0 rounded-top m-0">The Metro Cafe</h3>
+                            <div class="alert-light text-dark px-3 pb-2 border-0 rounded-bottom m-0">A Restaurant Website with CMS</div>
                         </div>
                         <div class="portfolio-btn flex-row-reverse">
                             <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="https://sonis-chronicles-123.000webhostapp.com/projects/NotesEditor/" target="_blank"><i class="fa fa-eye"></i></a>
@@ -903,6 +944,7 @@
     <script src="lib/lightbox/js/lightbox.min.js"></script>
     <script src="js/main.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
+
     <script type="text/javascript">
         function sendEmail() {
             if(document.getElementById("contact-name").value!="" && document.getElementById("contact-email").value!="" && document.getElementById("contact-subject").value!="" && document.getElementById("contact-message").value!="") {
@@ -926,6 +968,48 @@
                 alert("Mail has been sent successfully")
                 });
             }
+        }
+
+        filterSelection("all");
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("filterDiv");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+            }
+        }
+
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+            }
+        }
+
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                arr1.splice(arr1.indexOf(arr2[i]), 1);     
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+
+        var btnContainer = document.getElementById("portfolio-container");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function(){
+            var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+        });
         }
     </script>
 </body>
